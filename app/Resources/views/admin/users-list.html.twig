@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+{% block title %}Administración de usuarios{% endblock %}
+{% block body %}
+    <div class="content" style="margin-left: 0;">
+        <div class="workplace">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widgetButtons">
+                    <div class="bb"><a href="/aquarium/dashboard" class="tipb" title="Inicio"><span
+                                        class="ibw-home"></span></a></div>
+                        <div class="bb"><a href="/admin/" class="tipb active" title="Lista de usuarios"><span
+                                        class="ibw-users"></span></a></div>
+                        <div class="bb">
+                            <a href="/admin/newsletter" class="tipb" title="Eviar newsletter"><span
+                                        class="ibw-mail"></span></a>
+                        </div>
+                        <div class="bb"><a href="/admin/parameters" class="tipb" title="Editar soluciones"><span
+                                        class="ibw-list"></span></a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="page-header">
+                        <h1>Administración de usuarios</h1>
+                    </div>
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="alert alert-success">
+                            <div class="isw-ok"></div>
+                            <h4>Operación realizada.</h4>
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                    <div class="head clearfix">
+                        <div class="isw-users"></div>
+                        <h1>Usuarios</h1>
+                    </div>
+                    <div class="block-fluid">
+                        <table class="table listUsers" cellpadding="0" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th width="15%">Avatar</th>
+                                <th width="70%">Datos</th>
+                                <th width="15%">Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                <tr data-to="{{ user.email }}">
+                                    <td width="70">
+                                        <a href="#"><img src="{{ user.WebPath }}" class="img-thumbnail" width="100" height="100"></a>
+                                    </td>
+                                    <td class="user-info">
+                                        <form method="POST" action="{{ path('admin.user.update') }}" class="form-horizontal">
+                                            <div class="row-form col-md-6 clearfix">
+                                                <div class="col-md-3">
+                                                    <label for="user_name" class="required">Nombre</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input id="user_name" name="name" required="required" class="form-control" placeholder="Nombre" value="{{ user.name }}" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="row-form col-md-6 clearfix">
+                                                <div class="col-md-3">
+                                                    <label for="user_surname" class="required">Apellidos</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input id="user_surname" name="surname" required="required" class="form-control" placeholder="Apellidos" value="{{ user.surname }}" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="row-form col-md-6 clearfix">
+                                                <div class="col-md-3">
+                                                    <label for="email" class="required">Email:</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input id="email" name="email" required="required" class="form-control" placeholder="Email:" value="{{ user.email }}" type="email">
+                                                </div>
+                                            </div>
+                                            <div class="row-form col-md-6 clearfix">
+                                                <div class="col-md-3">
+                                                    <label for="alias" class="required">Alias:</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input id="alias" name="nickname" required="required" maxlength="255" pattern=".{2,}" class="form-control" placeholder="Nombre de usuario:" value="{{ user.username }}" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="row-form col-md-12 clearfix">
+                                                <div class="col-md-3">
+                                                    <label for="status">Estado del usuario</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <select name="status" id="status">
+                                                        <option value="0" {% if not user.locked %}selected{% endif %}>Activo</option>
+                                                        <option value="1" {% if user.locked %}selected{% endif %}>Bloqueado</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <input class="btn btn-primary col-md-12 col-xs-12" value="Actualizar usuario" type="submit">
+                                        </form>
+                                    </td>
+                                    <td width="300">
+                                        <p class="info">
+                                            <div class="widgetButtons">
+                                                <div class="bb margin-0">
+                                                    <a href="#sendEmailModal" class="tipb" data-toggle="modal" data-original-title="Enviar correo" title="Enviar correo">
+                                                        <span class="ibw-mail"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="bb margin-0">
+                                                    <a class="remove-user tipb" href="#" data-toggle="modal" data-original-title="Borrar usuario" title="Eliminar usuario">
+                                                        <span class="ibw-delete"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </p>
+                                        <form action="{{ path('admin.user.remove') }}" method="POST">
+                                            <input type="hidden" name="rm-email" value="{{ user.email }}">
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <div class="dr"><span></span></div>
+        </div>
+        <div class="modal fade" id="sendEmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form name="email-message" action="{{ path('admin.send_user_message') }}" method="POST" >
+                        <div class="modal-header head">
+                            <h4 class="text-center">Enviar correo</h4>
+                        </div>
+                        <div class="block-fluid" id="wysiwyg_container">
+                            <textarea id="wysiwyg"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="sendEmail" class="btn btn-success" data-toggle="confirmation" data-dismiss="modal">Enviar</button>
+                            <button id="cancelEmail" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/ckeditor/ckeditor.js') }}"></script>
+{% endblock %}

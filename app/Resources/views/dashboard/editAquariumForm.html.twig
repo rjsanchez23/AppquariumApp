@@ -1,0 +1,201 @@
+{% extends 'base.dashboard.html.twig' %}
+{% block title %}Appquarium{% endblock %}
+{% block menu %}
+    {{ render(controller(
+    'appquarium.controller.reminder:next7DaysReminders',
+    { 'aquariumID': aquarium.id }
+    )) }}
+{% endblock %}
+{% block body %}
+    <div class="content">
+
+
+        <div class="breadLine">
+
+            <ul class="breadcrumb">
+                <li><a href="/aquarium/dashboard">Dashboard</a> <span class="divider">></span></li>
+                <li><a href="/aquarium/profile/{{ aquarium.id }}">Aquario</a> <span class="divider">></span></li>
+                <li class="active">Editar</li>
+            </ul>
+
+        </div>
+
+        <div class="workplace">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="widgetButtons">
+                        <div class="bb"><a href="/aquarium/dashboard" class="tipb" title="Inicio"><span
+                                        class="ibw-home"></span></a></div>
+                        <div class="bb"><a href="/aquarium/profile/{{ aquarium.id }}" class="tipb" title="Volver a acuario"><span
+                                        class="ibw-aquarium"></span></a></div>
+
+                        <div class="bb">
+                            <a href="/aquarium/gallery/{{ aquarium.id }}" class="tipb" title="Upload"><span class="ibw-folder"></span></a>
+
+                        </div>
+                        <div class="bb"><a href="/aquarium/new" class="tipb" title="Nuevo"><span
+                                        class="ibw-plus"></span></a>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="head clearfix">
+                        <div class="isw-chats"></div>
+                        <h1>Editar acuario</h1>
+                    </div>
+                    <div class="block-fluid clearfix">
+
+                        <form action="/aquarium/edit/{{ aquarium.id }}" method="POST" id="wizard" enctype="multipart/form-data">
+                            <fieldset title="Acuario">
+                                <legend>Paso 1</legend>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row-form clearfix">
+                                            <div class="col-md-6">
+
+                                                <img id="avatar-preview" class="img-responsive col-xs-12" src="{{ asset('assets/dashboard/img/uploads/' ~ aquarium.avatar) }}">
+                                                <div class="row-form clearfix text-center"><button id="imgbutton" class="btn btn-block btn-lg btn-default">Cambiar avatar</button></div>
+                                                <input type="file" name="avatar" id="imgInput" style="display: none">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-3">Alias:</div>
+                                                    <div class="col-md-9"><input type="text" name="alias" value="{{ aquarium.alias }}" class="validate[required]"></div>
+                                                </div>
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-3">Capacidad:</div>
+                                                    <div class="col-md-9"><input type="text" name="capacity" value="{{ aquarium.capacity }}" class="validate[required] onlyNumbers"></div>
+                                                </div>
+                                                <div class="row-form clearfix">
+                                                    {% set water = ["freshwater", "saltwater"] %}
+                                                    <div class="col-md-3">Tipo de aqua:</div>
+                                                    <div class="col-md-9">
+                                                        <select name="water">
+                                                            {% for waterType in water %}
+                                                                {% if waterType == aquarium.waterType %}
+                                                                    <option value="{{ waterType }}" selected="selected">{{ waterType }}</option>
+                                                                {% else %}
+                                                                    <option value="{{ waterType }}">{{ waterType }}</option>
+                                                                {% endif %}
+                                                            {% endfor %}
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-form clearfix">
+                                            <div class="col-md-3">Descripción:</div>
+                                            <div class="col-md-9"><textarea name="description">{{ aquarium.description }}</textarea></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset title="Parámetros">
+                                <legend>Paso 2</legend>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {% set parametersDefault = ["Calcio", "Alcalinidad", "Salinidad", "pH", "Magnesio", "Fosfato", "Amonio", "Silicio", "Iodo", "Nitrato", "Estroncio", "Boro", "Hierro"] %}
+                                        {% set parametersSelected = [] %}
+                                        <div class="row-form clearfix">
+                                            <select multiple="" class="multiselect" id="fmultiselect" name="parameters[]">
+                                                {% for param in parameters %}
+                                                        <option selected="selected" value="{{ param.param.name }}">{{ param.param.name }}</option>
+                                                    {% set parametersSelected = parametersSelected|merge([param.param.name]) %}
+                                                {% endfor %}
+
+                                                {% for parameter in parametersDefault %}
+                                                    {% if parameter not in parametersSelected %}
+                                                        <option  value="{{ parameter }}">{{ parameter }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                            </select>
+
+                                            <div class="btn-group">
+                                                <button class="btn btn-default btn-xs" id="multiselect-selectAll" type="button">Selecinar todos</button>
+                                                <button class="btn btn-default btn-xs" id="multiselect-deselectAll" type="button">Quitar todos</button>
+                                                <a href="#newParamModal" role="button" class="btn btn-default btn-xs" data-toggle="modal">Añadir nuevo</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <!-- Bootrstrap modal form -->
+                            <div class="modal fade" id="newParamModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4>Nuevo parámetro</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row-form clearfix">
+                                                <div class="col-md-3">Nombre:</div>
+                                                <div class="col-md-9"><input type="text" name="newParam" id="newParam" value=""></div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" id="confirmModalParameter">Crear</button>
+                                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="dialog" id="popup_newParameter" style="display: none;" title="Modal form">
+                                <div class="block">
+                                    <span>Nuevo:</span>
+                                    <p><input type="text" name="newParam" id="newParam" value=""></p>
+                                </div>
+                            </div>
+
+                            <fieldset title="Valores máximos y mínimos">
+                                <legend>Paso 3</legend>
+                                <div class="row" id="paramWrapper">
+                                    {% for param in parameters %}
+                                        <div class="row-form clearfix" id="{{ param.param.name }}">
+                                            <div class="col-md-2 attrName">{{ param.param.name }}:</div>
+                                            <div class="col-md-5 attrMin"><input class="onlyNumbers" type="text" name="{{ param.param.name }}_min" placeholder="Min" value="{{ param.minValue }}"></div>
+                                            <div class="col-md-5 attrMax"><input class="onlyNumbers" type="text" name="{{ param.param.name }}_max" placeholder="Max" value="{{ param.maxValue }}"></div>
+                                              </div>
+                                    {% endfor %}
+                                </div>
+                            </fieldset>
+
+                            <input type="submit" class="btn btn-default finish" value="Guardar">
+                        </form>
+                        <div class="row-form clearfix" id="paramTemplate" style='display:none;'>
+                            <div class="col-md-2 attrName">pH:</div>
+                            <div class="col-md-5 attrMax"><input type="text" name="phMax" placeholder="Max"></div>
+                            <div class="col-md-5 attrMin"><input type="text" name="phMin" placeholder="Min"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dr"><span></span></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/stepywizard/jquery.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/multiselect/jquery.multi-select.js') }}"></script>
+{% endblock %}
+

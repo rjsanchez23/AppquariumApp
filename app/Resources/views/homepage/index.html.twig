@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Appquarium</title>
+    <meta name="description"
+          content="Gestor online de acuarios. Gestiona tus acuarios, tus habitantes y añade métricas de control.">
+    <meta name="viewport" content="width=device-width, initial-scale=0.85">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <link rel="icon" type="image/ico" href="{{ asset('assets/dashboard/img/logo.ico') }}">
+
+    <![endif]-->
+
+    <!-- Stylesheet -->
+    <link href="{{ asset('assets/homePage/css/app.css') }}" rel="stylesheet" type="text/css">
+
+</head>
+<body class="index parallax-title">
+
+<!-- SITE CONTENT -->
+
+<div id="site-content">
+    <!-- Header -->
+    <header class="app-header" id="app-header">
+        <div class="container">
+            <div class="header-wrapper">
+                <!-- Main-Nav -->
+                <nav class="main-nav">
+                    <ul>
+                        <li class="active">
+                            <a href="#s-index">Inicio</a>
+                        </li>
+                        <li><a href="#s-welcome">Acerca de la aplicación</a></li>
+                        <li><a href="#s-services">Servicios</a></li>
+                        <li><a href='/register'>Regístrate ahora</a></li>
+                        <li><a href="/login">Inicia sesión</a></li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero inactive" id="s-index">
+        <div class="hero-down">
+            <a href="#s-welcome" class="mouse">
+                <div class="mouse-animations">
+                    <div class="mouse-scroll-l"></div>
+                    <div class="mouse-scroll-2"></div>
+                    <div class="mouse-scroll-3"></div>
+                </div>
+            </a>
+        </div>
+        <div class="container">
+            <div class="title-wrapper">
+                <div class="hero-title">
+                    <h2>Bienvenido a AppQuarium</h2>
+
+                    <h3>Tu gestor online de acuarios</h3>
+                </div>
+                <div class="meta">
+                    <p class="blurb">Tu herramienta favorita para gestionar por completo tu aquario y mantenerte
+                        informado del su estado en todo momento</p>
+                    <a href="/register" class="button round brand-1">Regístrate gratis</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section primary welcome inactive" id="s-welcome">
+        <div class="container">
+            <div class="welcome-titles">
+                <header class="welcome-content">
+                    <div class="section-title">
+                        <h2>Esto es <b>Appquarium</b></h2>
+
+                        <h3>Una nueva experiencia para gestionar tu acuario</h3>
+                    </div>
+                    <p>Mantén un completo control sobre tu acuario y la fauna que lo habita a través de esta aplicación.
+                        <a href="register">Únete</a> para empezar a disfrutar de una nueva forma de gestionar tus
+                        acuarios</p>
+                </header>
+            </div>
+            <div class="earth">
+                <img src="{{ asset('assets/homePage/images/earth.png') }}" alt="">
+            </div>
+        </div>
+    </section>
+    <section class="section quote" id="s-services">
+        <div class="container">
+            <header class="sep active">
+                <div class="section-title">
+                    <h2 class="white">Servicios</h2>
+                </div>
+            </header>
+            <div class="owl-carousel services-slider">
+                <div class="widget service">
+                    <div class="widget-content">
+                        <header>
+                            <i class="livicon" data-n="pacman" data-op="1" data-c="#ffffff"
+                               data-s="48"
+                               data-hc="#FFFFFF"></i>
+
+                            <div class="title">
+                                <h4>Gestiona los habitantes del acuario</h4>
+                            </div>
+                        </header>
+                        <p>Mantén un control total sobre los habitantes.<br>Añade su foto, su nombre e incluso un
+                            diario</p>
+                    </div>
+                </div>
+                <div class="widget service">
+                    <div class="widget-content">
+                        <header>
+                            <i class="livicon" data-n="linechart" data-op="1" data-c="#FFFFFF" data-s="48"
+                               data-hc="#FFFFFF"></i>
+
+                            <div class="title">
+                                <h4>Control de métricas</h4>
+                            </div>
+                        </header>
+                        <p>Vigila en todo momento el estado de tu acuario, gracias a nuestras métricas
+                            personalizadas</p>
+                    </div>
+                </div>
+                <div class="widget service">
+                    <div class="widget-content">
+                        <header>
+                            <i class="livicon" data-n="image" data-op="1" data-c="#FFFFFF" data-s="48"
+                               data-hc="#FFFFFF"></i>
+
+                            <div class="title">
+                                <h4>Galería de imágenes</h4>
+                            </div>
+                        </header>
+                        <p>Crea tu propia galería de imágenes con fotos de tu acuario.</p>
+                    </div>
+                </div>
+                <div class="widget service">
+                    <div class="widget-content">
+                        <header>
+                            <i class="livicon" data-n="calendar" data-op="1" data-c="#FFFFFF"
+                               data-s="48"
+                               data-hc="false"></i>
+
+                            <div class="title">
+                                <h4>Añade tus propios recordatorios</h4>
+                            </div>
+                        </header>
+                        <p>Gracias a nuestro calendario, tendrás control total sobre los eventos relacionados con tu
+                            acuario y sus habitantes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="app-footer">
+        <div class="bottom-bar">
+            <div class="container">
+                <div class="footer-wrapper">
+                    <!-- Copyright Section -->
+                    <div class="copyright" id="copyright">
+                        © Appquarium MPWAR 2015
+                    </div>
+                    <!-- Footer Navigation -->
+                    <nav class="footer-nav">
+                        <ul>
+                            <li>
+                                <a href="#s-index">Inicio</a>
+                            </li>
+                            <li>
+                                <a href="#s-welcome">
+                                    Acerca de la aplicación
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#s-services">
+                                    Servicios
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- end #site-content -->
+
+<!-- TOOLS/UTILITIES -->
+
+<!-- Loading Spinner -->
+<div class="loading-wrapper active">
+    <div class="spinner"></div>
+</div>
+
+<!-- Fixed header -->
+<div class="fixed-header-container" id="fixed-header"></div>
+
+
+<!-- Flyout Nav Trigger -->
+<span class="icon-lrg nav-trigger flyout-trigger" id="flyout-trigger">
+    <i class="fa fa-bars"></i>
+</span>
+
+
+<!-- Control Panel Nav -->
+<nav class="cp-nav-container" id="cp-nav"></nav>
+
+<!-- Flyout Nav -->
+<nav class="flyout-nav-container" id="flyout-nav"></nav>
+
+<!-- Scroll-to-top Icon-->
+<a class="icon-lrg-border scroll-top" href="#site-content">
+    <i class="fa fa-angle-up"></i>
+</a>
+
+
+<!-- SCRIPTS -->
+
+<!-- jQuery -->
+<script type='text/javascript' src="{{ asset('assets/homePage/js/jquery.js') }}"></script>
+
+
+<!-- LivIcons -->
+<script type='text/javascript' src="{{ asset('assets/homePage/js/raphael.js') }}"></script>
+<script type='text/javascript' src="{{ asset('assets/homePage/js/livicons-custom.js') }}"></script>
+
+
+<!--Plugins -->
+<script type='text/javascript' src="{{ asset('assets/homePage/js/owl-carousel.js') }}"></script>
+<script type='text/javascript' src="{{ asset('assets/homePage/js/magnific-popup.js') }}"></script>
+
+<script type='text/javascript' src="{{ asset('assets/homePage/js/app.js') }}"></script>
+<script type='text/javascript' src="{{ asset('assets/homePage/js/homepage.js') }}"></script>
+
+</body>
+
+</html>
+

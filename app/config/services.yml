@@ -1,0 +1,10 @@
+services:
+    appquarium_user.registration.form.type:
+        class: AppquariumBundle\Form\Type\RegistrationFormType
+        tags:
+            - { name: form.type, alias: appquarium_user_registration }
+    appquarium_user.profile.form.type:
+        class: AppquariumBundle\Form\Type\ProfileFormType
+        tags:
+            - { name: form.type, alias: appquarium_user_profile }
+

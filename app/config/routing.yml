@@ -1,0 +1,8 @@
+appquarium:
+    resource: "@AppquariumBundle/Resources/config/routing.yml"
+    prefix:   /
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+admin:
+    resource: "@AppquariumBundle/Resources/config/admin.yml"
+    prefix:   /admin
