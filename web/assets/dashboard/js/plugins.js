@@ -119,10 +119,10 @@ $(document).ready(function () {
 
     $("form").validationEngine('attach', {promptPosition: "topLeft"});
 
-    // Wizard
-    if ($("#wizard").length > 0) {
-        $("#wizard").validationEngine('attach', {promptPosition: "topLeft"});
-        $('#wizard').stepy({
+    var wizard = $("#wizard");
+    if (wizard.length > 0) {
+        wizard.validationEngine('attach', {promptPosition: "topLeft"});
+        wizard.stepy({
             backLabel: 'Atras',
             nextLabel: 'Siguiente',
             next: function () {

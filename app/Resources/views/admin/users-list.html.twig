@@ -84,10 +84,10 @@
                                                 </div>
                                             </div>
                                             <div class="row-form col-md-12 clearfix">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <label for="status">Estado del usuario</label>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-8">
                                                     <select name="status" id="status">
                                                         <option value="0" {% if not user.locked %}selected{% endif %}>Activo</option>
                                                         <option value="1" {% if user.locked %}selected{% endif %}>Bloqueado</option>
