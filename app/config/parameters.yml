@@ -14,4 +14,4 @@ parameters:
     mailer_password: pececito
     mailer_message_subject: 'Appquarium Team'
     locale: es
-    secret: ThisTokenIsNotSoSecretChangeItecret: ThisTokenIsNotSoSecretChangeIt
+    secret: ThisTokenIsNotSoSecretChangeIt
