@@ -65,7 +65,7 @@ var calendar = $('#calendar').fullCalendar({
 });
 
 function storeEvent( event){
-    console.log(event);
+
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -98,7 +98,7 @@ function deleteEvent(event){
 
         },
         error: function (xhr, error) {
-            console.log(xhr.responseText);
+            //console.log(xhr.responseText);
         }
     });
 }

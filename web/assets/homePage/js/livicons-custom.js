@@ -4797,7 +4797,7 @@ jQuery(document).ready(function () {
         f(".livicon").addLivicon()
     })(jQuery);
     function fullNames(f) {
-        console.log(f);
+
         f = JSON.stringify(f);
         f = f.replace(/\"n\":/g, '"name":').replace(/\"s\":/g, '"size":').replace(/\"c\":/g, '"color":').replace(/\"hc\":/g, '"hovercolor":').replace(/\"a\":/g, '"animate":').replace(/\"i\":/g, '"iteration":').replace(/\"d\":/g, '"duration":').replace(/\"l\":/g, '"loop":').replace(/\"et\":/g, '"eventtype":').replace(/\"op\":/g, '"onparent":');
         return f = JSON.parse(f)

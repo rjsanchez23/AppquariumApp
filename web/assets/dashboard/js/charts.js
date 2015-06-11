@@ -49,7 +49,7 @@ $(document).ready(function () {
 
         }
 
-        console.log(sin1);
+
         $.plot($("#chart-1"),
             [{data: sin1, label: "max"}, {data: sin2, label: "min"}, {data: cos1, label: "value"}],
             {

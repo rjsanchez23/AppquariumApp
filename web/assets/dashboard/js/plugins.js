@@ -89,7 +89,7 @@ $(document).ready(function () {
                 FileUploaded: function (up, file, info) {
                     // Called when file has finished uploading
 
-                    console.log(info.response);
+
                     obj = JSON.parse(info.response);
                     var item = $('<div class="col-md-4 padding-bottom10" style="height: 250px;"></div>').appendTo($("#imageContainer"));
                     var image = $(new Image()).appendTo(item);
@@ -179,7 +179,7 @@ $(document).ready(function () {
             dataType: 'json',
             data: jsonStr,
             success: function (data) {
-                console.log(data);
+
                 data.forEach(function (parameter) {
 
                     var icon = checkParams(parameter);
@@ -200,7 +200,7 @@ $(document).ready(function () {
                 $(".spinnerContainer").hide();
             },
             error: function (xhr, error) {
-                console.log(xhr.responseText);
+                //console.log(xhr.responseText);
                 notify_e('Error', 'No ha sido posible guardar las mediciones');
             }
         });
@@ -240,7 +240,7 @@ $(document).ready(function () {
             $("#" + value.id).parent().remove();
         });
         var jsonStr = JSON.stringify(arrayCheckbox);
-        console.log(jsonStr);
+
         $.ajax({
             type: "POST",
             contentType: "application/json",
@@ -374,7 +374,7 @@ $("#deleteAccessory").on("submit", function (evt) {
         type: "POST",
         url: $("#accessoryDeleteModal form").attr("action"),
         success: function (data) {
-            console.log(data);
+
              $("#row_" + data.id).remove();
             $(".spinnerContainer").hide();
             notify_s("Eliminado correctamente!");
@@ -440,7 +440,7 @@ $('#btnNewBlogPost').on('click', function (evt) {
 $('.news').on('click',".removeLogPost", function (evt) {
     $(".spinnerContainer").show();
     var toDelete = $(this);
-    console.log($(this).attr("href"));
+
     $.ajax({
         type: "POST",
         url: $(this).attr("href"),

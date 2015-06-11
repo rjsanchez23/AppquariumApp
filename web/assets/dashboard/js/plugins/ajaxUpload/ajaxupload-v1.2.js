@@ -87,7 +87,7 @@
 
             });
 
-			console.log("appending form", form);
+
             $(button).append(form);
 
             //check if iframe exists
