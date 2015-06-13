@@ -1,0 +1,206 @@
+{% extends 'base.dashboard.html.twig' %}
+{% block title %}Appquarium{% endblock %}
+{% block menu %}
+
+    {{ render(controller(
+    'appquarium.controller.reminder:next7DaysReminders',
+    { 'aquariumID': inhabitant.aquarium.id }
+    )) }}
+{% endblock %}
+{% block body %}
+
+    <div class="content">
+        <div class="breadLine">
+            <ul class="breadcrumb">
+                <li><a href="/aquarium/dashboard">Dashboard</a> <span class="divider">></span></li>
+                <li class="active">Habitante</li>
+            </ul>
+        </div>
+
+        <div class="workplace">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="widgetButtons">
+                        <div class="bb">
+                            <a href="/aquarium/dashboard" class="tipb" title="Inicio"><span
+                                        class="ibw-home"></span></a></div>
+                        <div class="bb">
+                            <a href="/aquarium/profile/{{ inhabitant.aquarium.id }}" class="tipb"
+                               title="Volver al acuario"><span class="ibw-aquarium"></span></a></div>
+                        <div class="bb">
+                            <a href="/inhabitant/edit/{{ inhabitant.id }}" class="tipb" title="Editar habitante"><span
+                                        class="ibw-edit"></span></a>
+                        </div>
+                        <div class="bb"><a href="#newBlogPostModal" class="tipb"
+                                           title="Nueva entrada" data-toggle="modal"
+                                           data-id="{{ inhabitant.id }}"><span class="ibw-text_document"></span></a>
+
+                        </div>
+                        <div class="bb"><a id="bigDeleteButton" href="#deleteModal"
+                                           data-toggle="modal"
+                                           data-from="details"
+                                           data-path="/inhabitant/delete/{{ inhabitant.id }}"
+                                           class="tipb"
+                                           title="Eliminar habitante"><span class="ibw-delete"></span></a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="page-header">
+                    <h1>Ficha del habitante:
+                        <small>{{ inhabitant.alias }}</small>
+                    </h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile clearfix">
+                            <div class="image">
+                                <img class="img-responsive padding-0 col-md-12"
+                                     src="{{ asset('assets/dashboard/img/uploads/' ~ inhabitant.avatar) }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="head clearfix">
+                            <div class="isw-fish"></div>
+                            <h1>Info del habitante</h1>
+                        </div>
+                        <div class="block-fluid ucard">
+                            <div class="info">
+                                <ul class="rows">
+                                    <li>
+                                        <div class="title">Apodo:</div>
+                                        <div class="text">{{ inhabitant.alias|default(' ') }}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Nombre científico:</div>
+                                        <div class="text">{{ inhabitant.scientificName }}&nbsp;</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Descripción:</div>
+                                        <div class="text">{{ inhabitant.description }}&nbsp;</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Familia:</div>
+                                        <div class="text">{{ inhabitant.family }}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Precio:</div>
+                                        <div class="text">{{ inhabitant.price }}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Tipo de comida:</div>
+                                        <div class="text">{{ inhabitant.foodType }} &nbsp;</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Cada cuanto come:</div>
+                                        <div class="text">{{ inhabitant.feedTime }}&nbsp;</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Añadido al acuario:</div>
+                                        <div class="text">{{ inhabitant.createdAt }}&nbsp;</div>
+                                    </li>
+                                    <li>
+                                        <div class="title">Total:</div>
+                                        <div class="text">{{ inhabitant.number|default(' ') }}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="head clearfix">
+                            <div class="isw-book"></div>
+                            <h1>Diario del habitante</h1>
+                            <ul class="buttons">
+                                <li>
+                                    <a href="#newBlogPostModal" class="isw-plus"
+                                       title="Nueva entrada del diario" data-toggle="modal"
+                                       data-path="/inhabitant/blog/new/{{ inhabitant.id }}"></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="block news scrollBox">
+                            <div class="scroll" style="height: 340px;">
+                                <div class="item hide" id="logTemplate">
+                                    <div class="text-center logDate" >
+                                    </div>
+                                    <p class="logComment"></p>
+                                    <div class="controls">
+                                        <a href="" class="glyphicon glyphicon-trash tip removeLogPost" title="Remove"></a>
+                                    </div>
+                                </div>
+                                {% for currentLog in logs %}
+                                    <div class="item">
+                                        <div class="text-center">{{ currentLog.createdAt|date('l, M d, Y') }}.</div>
+                                        <p>{{ currentLog.comment|raw }}</p>
+                                        <div class="controls">
+                                            <a href="/inhabitant/blog/delete/{{ currentLog.id }}" class="glyphicon glyphicon-trash tip removeLogPost" title="Remove"></a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="newBlogPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true" data-id="{{ inhabitant.id }}" data-path="/inhabitant/blog/new/{{ inhabitant.id }}">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form action="/inhabitant/blog/new/{{ inhabitant.id }}" method="POST" id="newBlogPost">
+                        <div class="modal-header head">
+                            <h4 class="text-center">Nueva entrada del diario de habitante</h4>
+                        </div>
+                        <div class="block-fluid" id="wysiwyg_container">
+                            <textarea id="wysiwyg" name="blogPost"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btnNewBlogPost" class="btn btn-success"  data-dismiss="modal">Aceptar
+                            </button>
+                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <form action="/inhabitant/delete/{{ inhabitant.id }}" method="POST">
+                        <div class="modal-header head">
+                            <h4 class="text-center">Confirma la eliminación del habitante</h4>
+                        </div>
+                        <div class="modal-body modal-body-np">
+                            <div class="row">
+                                <div class="block">
+                                    ¿Estás seguro que quieres eliminar el habitante del acuario?
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-warning"
+                                   value="Aceptar"/>
+                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="spinnerContainer" style="display:none;">
+            <div id="spinner" class="spinner">
+                <img id="img-spinner" src="{{ asset('assets/dashboard/img/loaders/appquarium.gif') }}" width="100px" height="40px" alt="Loading"/>
+            </div>
+            <div id="bowl" class="bowl">
+                <img id="img-bowl" src="{{ asset('assets/dashboard/img/loaders/fishbowl.png') }}" width="160px" height="160px" alt="Loading"/>
+            </div>
+        </div>
+        </div>
+{% endblock %}

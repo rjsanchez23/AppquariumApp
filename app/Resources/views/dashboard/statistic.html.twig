@@ -141,15 +141,8 @@
 <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins.js') }}"></script>
 <script type='text/javascript' src="{{ asset('assets/dashboard/js/settings.js') }}"></script>
 <script>
-
-
-
     var measures = {{ measures|json_encode|raw }};
     var parameters = {{ parameters|json_encode|raw }};
-
-
-
-
 </script>
     <script type='text/javascript' src="{{ asset('assets/dashboard/js/statistics.js') }}"></script>
 {% endblock %}

@@ -23,8 +23,6 @@ security:
                     check_path: /login_check
                     login_path: /login
                     use_forward: false
-                    #always_use_default_target_path: true
-                    #default_target_path:            /aquarium/dashboard
                     success_handler: login.redirection.success.handler
                     target_path_parameter:          false
                     use_referer:                    false

@@ -1,0 +1,113 @@
+{% extends 'base.dashboard.html.twig' %}
+{% block title %}Appquarium{% endblock %}
+{% block menu %}
+
+    {{ render(controller(
+    'appquarium.controller.reminder:next7DaysReminders',
+    { 'aquariumID': aquarium.id }
+    )) }}
+{% endblock %}
+{% block body %}
+
+    <div class="content">
+
+
+        <div class="breadLine">
+            <ul class="breadcrumb">
+                <li><a href="/aquarium/dashboard">Dashboard</a> <span class="divider">></span></li>
+                <li class="active">Nuevo Habitante</li>
+            </ul>
+        </div>
+
+        <div class="workplace">
+
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="head clearfix">
+                        <div class="isw-chats"></div>
+                        <h1>Editar habitante</h1>
+                    </div>
+                    <div class="block-fluid clearfix">
+
+                        <form action="/postInhabitant/{{ aquarium.id }}" method="POST"  enctype="multipart/form-data">
+                            <fieldset title="Habitante">
+
+                                        <div class="row-form clearfix">
+                                            <div class="col-md-6">
+                                                <img id="avatar-preview" class="img-responsive col-xs-12" src="{{ asset('assets/dashboard/img/uploads/tresojos.jpg') }}">
+                                                <div class="row-form clearfix text-center"><button id="imgbutton" class="btn btn-block btn-lg btn-default">Cambiar avatar</button></div>
+                                                <input type="file" name="avatar" id="imgInput" style="display: none">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-4">Alias</div>
+                                                    <div class="col-md-8"><input type="text" name="alias" class="validate[required]"></div>
+                                                </div>
+
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-4">Nombre científico</div>
+                                                    <div class="col-md-8"><input type="text" name="scientificName"></div>
+                                                </div>
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-4">Cantidad</div>
+                                                    <div class="col-md-8"><input type="text" name="number" class="validate[required] onlyNumbers"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-form clearfix">
+                                            <div class="col-md-6">
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-4">Alimento</div>
+                                                    <div class="col-md-8"><input type="text" name="foodType"></div>
+                                                </div>
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-4">Periodicidad </div>
+                                                    <div class="col-md-8"><input type="text" name="feedTime"></div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-4">Precio</div>
+                                                    <div class="col-md-8"><input type="text" name="price" class="onlyNumbers"></div>
+
+                                                </div>
+
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-4">Familia</div>
+                                                    <div class="col-md-8">
+                                                        <select name="family">
+                                                            <option value="vertebrate">Vertebrado
+                                                            <option value="invertebrate">Invertebrado
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                <div class="col-md-12">
+                                        <div class="row-form clearfix">
+                                            <div class="col-md-2">Descripción:</div>
+                                            <div class="col-md-10"><textarea name="description"></textarea></div>
+                                        </div>
+                                </div>
+                            </fieldset>
+                            <div class="col-md-12">
+                            <input type="submit" class="btn btn-default finish" value="Guardar">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="dr"><span></span></div>
+        </div>
+    </div>
+{% endblock %}
+
+

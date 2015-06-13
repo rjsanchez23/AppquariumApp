@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('assets/dashboard/css/stylesheets.css') }}" rel="stylesheet" type="text/css">
+        {% endblock %}
+        <link rel="icon" type="image/ico" href="{{ asset('assets/dashboard/img/logo.ico') }}">
+    </head>
+    <body>
+        {% block header %}
+            <div class="header">
+                <a class="logo" href="{{ path('appquarium_homepage') }}">
+                    <img src="{{ asset('assets/dashboard/img/logo.png') }}" alt="Appquarium" title="Appquarium">
+                </a>
+                <ul class="header_menu">
+                    <li class="list_icon"><a href="#">&nbsp;</a></li>
+                    <li class="settings_icon"><a href="#" class="link_themeSettings">&nbsp;</a>
+                        <div id="themeSettings" class="popup">
+                            <div class="head clearfix">
+                                <a class="menuHeading" href="{{ path('admin.users_list') }}">
+                                    <span class="isw-users"></span>
+                                    <span class="name">Administración</span>
+                                </a>
+                            </div>
+                            <div class="head clearfix">
+                                <a class="menuHeading" href="{{ path('admin.newsletter') }}">
+                                    <span class="isw-mail"></span>
+                                    <span class="name">Enviar Newsletter</span>
+                                </a>
+                            </div>
+                            <div class="head clearfix">
+                                <a class="menuHeading" href="{{ path('fos_user_change_password') }}">
+                                    <span class="isw-sync"></span>
+                                    <span class="name">Cambiar contraseña</span>
+                                </a>
+                            </div>
+                            <div class="head clearfix">
+                                <a class="menuHeading" href="{{ path('admin.parameters') }}">
+                                    <span class="isw-edit"></span>
+                                    <span class="name">Soluciones</span>
+                                </a>
+                            </div>
+                            <div class="head clearfix">
+                                <a class="menuHeading" href="{{ path('fos_user_security_logout') }}">
+                                    <span class="isw-power"></span>
+                                    <span class="name">Salir</span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        {% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/jquery/jquery-1.10.2.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/jquery/jquery-ui-1.10.1.custom.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/jquery/jquery-migrate-1.2.1.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/jquery/jquery.mousewheel.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/cookie/jquery.cookies.2.2.0.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/bootstrap.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/maskedinput/jquery.maskedinput-1.3.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/validation/languages/jquery.js') }}" charset='utf-8'></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/validation/jquery.js') }}" charset='utf-8'></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/fancybox/jquery.fancybox.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/pnotify/jquery.pnotify.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/ibutton/jquery.ibutton.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/scrollup/jquery.scrollUp.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/cleditor/jquery.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/plugins/bootbox.min.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/settings.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/actions.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('assets/dashboard/js/admin.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

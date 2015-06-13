@@ -1,0 +1,19 @@
+<div class="dr"><span></span></div>
+
+<div class="widget-fluid">
+    <table class="sOrders" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th width="40">Fecha</th><th>Recordatorio</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reminder in reminders %}
+        <tr>
+            <td><span class="date">{{ reminder.maintenance_date|date("d/m/Y") }}</span></td>
+            <td>{{ reminder.name }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
