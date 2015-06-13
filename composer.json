@@ -6,7 +6,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com/rjsanchez23/Appquarium-bundle"
+            "url": "git@github.com:rjsanchez23/appquarium-bundle"
         }
     ],
     "autoload": {
